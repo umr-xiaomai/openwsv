@@ -15,7 +15,7 @@ import { METHODOLOGY_POINTS } from '../data/benchmarkData';
           </h2>
           <p class="text-sm text-muted-foreground leading-relaxed text-pretty">
             Every number on this page comes from a real evaluation run over the
-            <span class="font-mono text-foreground">dataset_spatial_v2</span> artifacts: a manifest,
+            <span class="font-mono text-foreground">dataset_spatial_v3</span> artifacts: a manifest,
             cached backbone features and trained head checkpoints. There are no synthetic scores,
             no LLM-as-a-judge, and no placeholder values — a dimension that cannot be measured is
             reported as N/A.

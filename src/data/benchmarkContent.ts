@@ -48,7 +48,7 @@ export const TASK_EXAMPLES: TaskExample[] = [
     title: 'Object Change Detection (4-way)',
     description:
       'Given a before/after RGB frame pair from the same synthetic 3D tabletop scene and the before-frame entity table (slot → bbox), classify every slot into none / appeared / displaced / disappeared.',
-    repoOrDomain: 'dataset_spatial_v2 · changes[]',
+    repoOrDomain: 'dataset_spatial_v3 · changes[]',
     modality: 'RGB pair 1024×768',
     sceneType: 'Synthetic 3D tabletop',
     difficulty: 'Standard',
@@ -62,7 +62,7 @@ export const TASK_EXAMPLES: TaskExample[] = [
     title: 'Spatial Relation Prediction (11 + none)',
     description:
       'For each candidate object pair, predict one of 11 exclusive spatial relations (on, inside, occludes, near, left_of, right_of, above, below, behind, in_front_of, touching …) plus the none class. Evaluation adds same-pair negative pairs sampled with the training seed.',
-    repoOrDomain: 'dataset_spatial_v2 · relations[]',
+    repoOrDomain: 'dataset_spatial_v3 · relations[]',
     modality: 'RGB pair 1024×768',
     sceneType: 'Synthetic 3D tabletop',
     difficulty: 'Hard',
@@ -76,7 +76,7 @@ export const TASK_EXAMPLES: TaskExample[] = [
     title: 'Relative Position Prediction (10-way)',
     description:
       'For a real (non-none) relation pair, predict the relative position class of the two objects (front / back / left / right / above / below / near / far …). This is a conditioned protocol: the ground-truth relation class is provided as a one-hot input.',
-    repoOrDomain: 'dataset_spatial_v2 · rel_pos_keys',
+    repoOrDomain: 'dataset_spatial_v3 · rel_pos_keys',
     modality: 'RGB pair 1024×768',
     sceneType: 'Synthetic 3D tabletop',
     difficulty: 'Hard',
@@ -90,7 +90,7 @@ export const TASK_EXAMPLES: TaskExample[] = [
     title: 'Affordance Attributes (contact / support)',
     description:
       'For each real relation pair, predict two binary physical attributes: whether the two objects are in contact, and whether one supports the other. Reported as the mean of the two binary macro-F1 scores.',
-    repoOrDomain: 'dataset_spatial_v2 · contact/support',
+    repoOrDomain: 'dataset_spatial_v3 · contact/support',
     modality: 'RGB pair 1024×768',
     sceneType: 'Synthetic 3D tabletop',
     difficulty: 'Hard',
@@ -128,7 +128,7 @@ export const METHODOLOGY_POINTS: MethodologyPoint[] = [
     title: '60-Pair Head-to-Head Against Cloud VLMs',
     subtitle: 'same sample, same ground truth, no placeholders',
     body:
-      'A deterministic random sample of 60 test pairs (seed 20261020, sorted) is replayed to every baseline: the offline DeepSeek-Flash raw cache and OpenAI-compatible cloud VLMs configured in the run config. Comparison uses relation matching by (from_slot, to_slot) with the cloud change macro-F1 convention. The leaderboard is ranked by the 7-dimension equal-weight composite score (change top-1, change macro-F1, relation class, relative position, contact/support, event F1, world-state consistency); the compatible event-level score (100 × event macro-F1), topology F1, affordance accuracy, state dynamics and head/pair/event/replay details stay available in each row. Any dimension without a real measurement is null and rendered as N/A — never filled with a placeholder.',
+      'A deterministic random sample of 60 test pairs from dataset_spatial_v3 (seed 20261020, sorted) is scored for every baseline: the v3 heads over cached Qwen3.8-27B slot features plus the OpenAI-compatible cloud VLMs, each answering the same slots-and-relations prompt over the same two RGB frames. Four rows are already re-scored on this sample; the remaining rows carry their previous dataset_spatial_v2 numbers until their v3 rerun, as disclosed under the table. Comparison uses relation matching by (from_slot, to_slot) with the cloud change macro-F1 convention. The leaderboard is ranked by the 7-dimension equal-weight composite score (change top-1, change macro-F1, relation class, relative position, contact/support, event F1, world-state consistency); the compatible event-level score (100 × event macro-F1), topology F1, affordance accuracy, state dynamics and head/pair/event/replay details stay available in each row. Any dimension without a real measurement is null and rendered as N/A — never filled with a placeholder.',
   },
 ];
 

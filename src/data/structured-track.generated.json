@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "protocol": "v2",
+    "track": "structured-input",
+    "dataset": "dataset_spatial_v3",
+    "split": "test",
+    "nPairs": 60,
+    "sampleSeed": 20261022,
+    "generated": "2026-10-22",
+    "source": "starlife_eval reports/v2/structured_track.json",
+    "note": "Structured-input track: the model consumes before/after frames plus detector boxes and emits structured events, so these numbers are not comparable with the text-only SpatialMQA rows. Detections are ground-truth boxes; the service runs no detector."
+  },
+  "models": [
+    {
+      "id": "starlife-v1-wsv-lite-api",
+      "name": "StarLife-1-WSV-Lite (served API)",
+      "family": "StarLife",
+      "provider": "StarLife AI",
+      "mode": "SERVED-API",
+      "label": "end-to-end, boxes-only geometry",
+      "metrics": {
+        "change_top1": { "value": 91.45, "ci95": [88.70, 94.02] },
+        "change_macro_f1": { "value": 67.95, "ci95": [63.86, 88.34] },
+        "relation_type": { "value": 75.9, "ci95": [69.94, 82.07] },
+        "rel_pos": { "value": 88.1, "ci95": [81.6, 94.12], "n": 126 },
+        "attrs": { "value": 93.65, "ci95": [89.17, 97.13], "n": 126 }
+      },
+      "n": 60,
+      "notes": "5 dimensions scored; event F1 and state consistency are N/A in this run."
+    },
+    {
+      "id": "starlife-v1-wsv-local-heads",
+      "name": "StarLife-1-WSV (local heads, reference)",
+      "family": "StarLife",
+      "provider": "StarLife AI",
+      "mode": "LOCAL-HEADS",
+      "label": "GT-pose features, published v1.5",
+      "metrics": {
+        "change_top1": { "value": 99.7, "ci95": null },
+        "change_macro_f1": { "value": 99.4, "ci95": null },
+        "relation_type": { "value": 92.2, "ci95": null },
+        "rel_pos": { "value": 83.7, "ci95": null },
+        "attrs": { "value": 99, "ci95": null }
+      },
+      "n": 60,
+      "notes": "Reference row from the published v1.5 leaderboard: consumes GT-pose feature bundles instead of the served box-only pipeline, so the two modes differ by design."
+    }
+  ]
+}

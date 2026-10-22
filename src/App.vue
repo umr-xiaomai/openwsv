@@ -6,6 +6,7 @@ import WorldModelStages from './components/WorldModelStages.vue';
 import ScoreBars from './components/ScoreBars.vue';
 import LeaderboardTable from './components/LeaderboardTable.vue';
 import SpatialMqaTable from './components/SpatialMqaTable.vue';
+import SpatialMqaBars from './components/SpatialMqaBars.vue';
 import TaskExamplesGrid from './components/TaskExamplesGrid.vue';
 import MethodologySection from './components/MethodologySection.vue';
 import InvertedWhitepaperSection from './components/InvertedWhitepaperSection.vue';
@@ -110,8 +111,9 @@ const scrollToSection = (sectionId: string) => {
             </span>
           </div>
 
-          <!-- v2 default: T1 task readout from spatialmqa.generated.json -->
+          <!-- v2 default: T1 bars above the T1 detail table -->
           <template v-if="activeProtocol === 'v2'">
+            <SpatialMqaBars />
             <SpatialMqaTable />
           </template>
 

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { ref, computed } from 'vue';
 import Header from './components/Header.vue';
 import Hero from './components/Hero.vue';
@@ -7,6 +7,7 @@ import ScoreBars from './components/ScoreBars.vue';
 import LeaderboardTable from './components/LeaderboardTable.vue';
 import SpatialMqaTable from './components/SpatialMqaTable.vue';
 import SpatialMqaBars from './components/SpatialMqaBars.vue';
+import StructuredTrackTable from './components/StructuredTrackTable.vue';
 import TaskExamplesGrid from './components/TaskExamplesGrid.vue';
 import MethodologySection from './components/MethodologySection.vue';
 import InvertedWhitepaperSection from './components/InvertedWhitepaperSection.vue';
@@ -115,6 +116,7 @@ const scrollToSection = (sectionId: string) => {
           <template v-if="activeProtocol === 'v2'">
             <SpatialMqaBars />
             <SpatialMqaTable />
+            <StructuredTrackTable />
           </template>
 
           <template v-else>

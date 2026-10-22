@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "protocol": "v2",
+    "dataset": "SpatialMQA",
+    "capability": "T1",
+    "nTotal": 1612,
+    "generated": "2026-10-22",
+    "source": "starlife_eval v2 runner",
+    "note": "v2 任务矩阵 · SpatialMQA（单图多选）。MindEdit(T3) 待补测；StarLife 自研模型待测。"
+  },
+  "models": [
+    {
+      "id": "qwen3.8-flash",
+      "name": "qwen3.8-flash",
+      "family": "Qwen",
+      "provider": "Alibaba Cloud",
+      "mode": "ZERO-SHOT",
+      "accuracy": 76.55,
+      "ci95": [
+        74.44,
+        78.54
+      ],
+      "coverage": 100.0,
+      "n": 1612,
+      "nTotal": 1612,
+      "complete": true,
+      "bySplit": {
+        "test": {
+          "accuracy": 76.49,
+          "n": 1076
+        },
+        "validation": {
+          "accuracy": 76.68,
+          "n": 536
+        }
+      }
+    },
+    {
+      "id": "deepseek-flash",
+      "name": "deepseek-flash",
+      "family": "DeepSeek",
+      "provider": "DeepSeek",
+      "mode": "ZERO-SHOT",
+      "accuracy": 74.88,
+      "ci95": [
+        72.89,
+        76.74
+      ],
+      "coverage": 100.0,
+      "n": 1612,
+      "nTotal": 1612,
+      "complete": true,
+      "bySplit": {
+        "test": {
+          "accuracy": 74.26,
+          "n": 1076
+        },
+        "validation": {
+          "accuracy": 76.12,
+          "n": 536
+        }
+      }
+    },
+    {
+      "id": "glm-5.3-flash",
+      "name": "glm-5.3-flash",
+      "family": "GLM",
+      "provider": "Zhipu AI",
+      "mode": "ZERO-SHOT",
+      "accuracy": 73.88,
+      "ci95": [
+        71.77,
+        75.87
+      ],
+      "coverage": 100.0,
+      "n": 1612,
+      "nTotal": 1612,
+      "complete": true,
+      "bySplit": {
+        "test": {
+          "accuracy": 73.51,
+          "n": 1076
+        },
+        "validation": {
+          "accuracy": 74.63,
+          "n": 536
+        }
+      }
+    },
+    {
+      "id": "minimax-m3.1-flash",
+      "name": "minimax-m3.1-flash",
+      "family": "MiniMax",
+      "provider": "MiniMax",
+      "mode": "ZERO-SHOT",
+      "accuracy": 62.32,
+      "ci95": [
+        60.02,
+        64.68
+      ],
+      "coverage": 99.94,
+      "n": 1611,
+      "nTotal": 1612,
+      "complete": false,
+      "bySplit": {
+        "test": {
+          "accuracy": 63.72,
+          "n": 1075
+        },
+        "validation": {
+          "accuracy": 59.51,
+          "n": 536
+        }
+      }
+    },
+    {
+      "id": "mimo-v2.6-pro",
+      "name": "mimo-v2.6-pro",
+      "family": "MiMo",
+      "provider": "Xiaomi",
+      "mode": "ZERO-SHOT",
+      "accuracy": 54.59,
+      "ci95": [
+        52.23,
+        57.07
+      ],
+      "coverage": 100.0,
+      "n": 1612,
+      "nTotal": 1612,
+      "complete": true,
+      "bySplit": {
+        "test": {
+          "accuracy": 54.37,
+          "n": 1076
+        },
+        "validation": {
+          "accuracy": 55.04,
+          "n": 536
+        }
+      }
+    }
+  ]
+}

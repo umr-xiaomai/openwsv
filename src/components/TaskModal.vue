@@ -77,7 +77,7 @@ const emit = defineEmits<{
           <ListChecks class="size-3.5 text-foreground shrink-0 mt-0.5" />
           <span>
             Local heads consume cached backbone features from
-            <span class="font-mono text-foreground">spatial_v2.npz</span>; cloud baselines consume the two RGB
+            <span class="font-mono text-foreground">spatial_v3.npz</span>; cloud baselines consume the two RGB
             frames through the same prompt contract. Scores are computed by starlife_eval — never entered manually.
           </span>
         </div>

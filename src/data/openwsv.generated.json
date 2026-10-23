@@ -233,15 +233,18 @@
       },
       {
         "name": "提示词",
-        "frozen": "wsv-prompt@v3 · 中文/英文双语模板 · sha256 1a4c7e0b3d6f9a2c5e8b1d4f7a0c3e6b9d2f5a8c1e4b7d0f3a6c9e2b5d8f1a4c"
+        "frozen": "openwsv-1 · 逐字冻结（choice / short / json 三种协议，改字即升版本）",
+        "value": "openwsv-1"
       },
       {
         "name": "判分器",
-        "frozen": "starlife_eval@wsv-e879a07 · bootstrap 1,000 次 · seed 20261022"
+        "frozen": "starlife_eval@3f613d7 · 确定性判分（无 LLM judge）· bootstrap 1,000 次",
+        "value": "starlife_eval@3f613d7"
       },
       {
         "name": "种子",
-        "frozen": "split 20261020 · bootstrap 20261023 · 题目与选项顺序固定"
+        "frozen": "split 20261020 · bootstrap 20261022 · 题目/选项顺序固定",
+        "value": "20261020 / 20261022"
       }
     ],
     "notes": "五件套随 openwsv-1 冻结包签发；任一组件变更必须重新出分并递增框架版本，不允许在后处理阶段替换。"

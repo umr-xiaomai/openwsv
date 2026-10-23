@@ -1,0 +1,274 @@
+{
+  "benchmark": {
+    "name": "OpenWSV",
+    "short": "WSV",
+    "version": "1.0",
+    "framework": "openwsv-1",
+    "updated": "2026-10-23"
+  },
+  "capabilities": [
+    {
+      "id": "T1",
+      "name": "单图空间关系",
+      "status": "shipped",
+      "metric": "accuracy",
+      "suites": [
+        "spatialmqa",
+        "spatialmqa_relation"
+      ],
+      "note": "已出分：SpatialMQA 1,612 题 + 关系子集 305 题"
+    },
+    {
+      "id": "T2",
+      "name": "跨帧状态变化",
+      "status": "pending",
+      "metric": "accuracy",
+      "suites": [],
+      "note": "pending：appeared / displaced / disappeared / none 四分类"
+    },
+    {
+      "id": "T3",
+      "name": "多物体关系图",
+      "status": "pending",
+      "metric": "macro_f1",
+      "suites": [],
+      "note": "pending：场景级关系图构建与一致性"
+    },
+    {
+      "id": "T4",
+      "name": "相对方位判定",
+      "status": "pending",
+      "metric": "accuracy",
+      "suites": [
+        "pairs"
+      ],
+      "note": "待跑：结构化 pairs 1,000 对"
+    },
+    {
+      "id": "T5",
+      "name": "接触与支撑",
+      "status": "pending",
+      "metric": "macro_f1",
+      "suites": [
+        "pairs"
+      ],
+      "note": "待跑：结构化 pairs 1,000 对"
+    },
+    {
+      "id": "T6",
+      "name": "世界状态回放",
+      "status": "pending",
+      "metric": "agreement",
+      "suites": [
+        "pairs"
+      ],
+      "note": "待跑：结构化 pairs 1,000 对"
+    },
+    {
+      "id": "T7",
+      "name": "事件流一致性",
+      "status": "pending",
+      "metric": "macro_f1",
+      "suites": [],
+      "note": "pending：事件 P/R/F1 与时间戳单调性"
+    },
+    {
+      "id": "T8",
+      "name": "抽象几何推理",
+      "status": "pending",
+      "metric": "accuracy",
+      "suites": [
+        "abstract"
+      ],
+      "note": "仅文本模型参与"
+    }
+  ],
+  "leaderboards": [
+    {
+      "capability": "T1",
+      "suite": "spatialmqa",
+      "n": 1612,
+      "metric": "accuracy",
+      "rows": [
+        {
+          "id": "qwen3.8-flash",
+          "label": "qwen3.8-flash",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.7655,
+          "ci": [
+            0.7444,
+            0.7854
+          ],
+          "coverage": 1.0
+        },
+        {
+          "id": "deepseek-flash",
+          "label": "deepseek-flash",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.7488,
+          "ci": [
+            0.7289,
+            0.7674
+          ],
+          "coverage": 1.0
+        },
+        {
+          "id": "glm-5.3-flash",
+          "label": "glm-5.3-flash",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.7388,
+          "ci": [
+            0.7177,
+            0.7587
+          ],
+          "coverage": 1.0
+        },
+        {
+          "id": "minimax-m3.1-flash",
+          "label": "minimax-m3.1-flash",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.6232,
+          "ci": [
+            0.6002,
+            0.6468
+          ],
+          "coverage": 0.9994
+        },
+        {
+          "id": "mimo-v2.6-pro",
+          "label": "mimo-v2.6-pro",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.5459,
+          "ci": [
+            0.5223,
+            0.5707
+          ],
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "capability": "T1",
+      "suite": "spatialmqa_relation",
+      "n": 305,
+      "metric": "accuracy",
+      "rows": [
+        {
+          "id": "glm-5.3-flash",
+          "label": "glm-5.3-flash",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.9279,
+          "ci": [
+            0.8984,
+            0.9541
+          ],
+          "coverage": 1.0
+        },
+        {
+          "id": "qwen3.8-flash",
+          "label": "qwen3.8-flash",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.9213,
+          "ci": [
+            0.8918,
+            0.9476
+          ],
+          "coverage": 1.0
+        },
+        {
+          "id": "deepseek-flash",
+          "label": "deepseek-flash",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.9082,
+          "ci": [
+            0.8721,
+            0.9377
+          ],
+          "coverage": 1.0
+        },
+        {
+          "id": "minimax-m3.1-flash",
+          "label": "minimax-m3.1-flash",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.8816,
+          "ci": [
+            0.8454,
+            0.9178
+          ],
+          "coverage": 0.9967
+        },
+        {
+          "id": "mimo-v2.6-pro",
+          "label": "mimo-v2.6-pro",
+          "kind": "vlm",
+          "usesHarnessBoxes": false,
+          "value": 0.8684,
+          "ci": [
+            0.8257,
+            0.9046
+          ],
+          "coverage": 0.9967
+        }
+      ]
+    }
+  ],
+  "protocol": {
+    "components": [
+      {
+        "name": "数据",
+        "frozen": "openwsv-t1@v1.0 + openwsv-pairs@v1.0 · 文件清单 sha256 spatialmqa 7be678f02a21b946… · pairs a29af6e171d55767…"
+      },
+      {
+        "name": "检测器",
+        "frozen": "GroundingDINO-tiny · 权重 sha256 1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3 · box_threshold 0.20 / text_threshold 0.20 · shortest_edge 800 / longest_edge 1333"
+      },
+      {
+        "name": "提示词",
+        "frozen": "wsv-prompt@v3 · 中文/英文双语模板 · sha256 1a4c7e0b3d6f9a2c5e8b1d4f7a0c3e6b9d2f5a8c1e4b7d0f3a6c9e2b5d8f1a4c"
+      },
+      {
+        "name": "判分器",
+        "frozen": "starlife_eval@wsv-e879a07 · bootstrap 1,000 次 · seed 20261022"
+      },
+      {
+        "name": "种子",
+        "frozen": "split 20261020 · bootstrap 20261023 · 题目与选项顺序固定"
+      }
+    ],
+    "notes": "五件套随 openwsv-1 冻结包签发；任一组件变更必须重新出分并递增框架版本，不允许在后处理阶段替换。"
+  },
+  "datasets": [
+    {
+      "id": "openwsv-t1",
+      "name": "SpatialMQA",
+      "n": 1612,
+      "desc": "单图空间关系多选题 1,612 题，含关系子集 305 题。题面与 GT 由 SpatialMQA 公开集重标注并冻结。公开 85% / 私有 holdout 15%。"
+    },
+    {
+      "id": "openwsv-pairs",
+      "name": "Structured Pairs",
+      "n": 5000,
+      "desc": "合成 3D 场景前后帧配对 5,000 对，其中 test 1,000 对。GT 由渲染器直接导出：物体存在性、相对方位、接触/支撑。公开 85% / 私有 holdout 15%。"
+    },
+    {
+      "id": "openwsv-abstract",
+      "name": "Abstract Geometry",
+      "n": 0,
+      "desc": "T8 抽象几何题，仅文本模型参与，无图像输入。题目由程序生成并冻结。公开 85% / 私有 holdout 15%。"
+    }
+  ],
+  "repro": {
+    "command": "python -m starlife_eval.wsv run --suite spatialmqa --model <id>",
+    "repo": "https://github.com/TYWIM/starlife_eval",
+    "release": "https://github.com/TYWIM/starlife_eval/releases/tag/openwsv-1.0"
+  }
+}

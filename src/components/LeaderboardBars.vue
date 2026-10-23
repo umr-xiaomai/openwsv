@@ -5,20 +5,16 @@ import {
   fmtCoverage,
   fmtPct,
   isIncompleteCoverage,
-  metricLabel,
   modelColor,
   sortedRows,
-  type Leaderboard,
+  type Board,
 } from '../data/openwsv';
 
-const props = defineProps<{ board: Leaderboard }>();
+const props = defineProps<{ board: Board }>();
 
 const rows = computed(() => sortedRows(props.board));
-const hasCi = computed(() => props.board.rows.some((row) => row.ci != null));
-const hasCoverage = computed(() => props.board.rows.some((row) => row.coverage != null));
 
 const widthOf = (value: number): string => `${Math.min(100, Math.max(0, value * 100)).toFixed(2)}%`;
-
 const ciLeft = (ci: [number, number] | null): string => `${((ci?.[0] ?? 0) * 100).toFixed(2)}%`;
 const ciWidth = (ci: [number, number] | null): string =>
   `${Math.max(0, ((ci?.[1] ?? 0) - (ci?.[0] ?? 0)) * 100).toFixed(2)}%`;
@@ -28,12 +24,10 @@ const pointLeft = (value: number): string => `${Math.min(100, Math.max(0, value 
 <template>
   <div data-leaderboard-bars class="border border-border bg-card/40 px-4 pb-4 pt-3 sm:px-5">
     <div class="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-      <span class="text-[11px] font-mono uppercase tracking-[0.14em] text-muted-foreground">
-        {{ metricLabel(board.metric) }} · n = {{ fmtCount(board.n) }}
+      <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+        accuracy<template v-if="board.n != null"> · n = {{ fmtCount(board.n) }}</template>
       </span>
-      <span class="text-[10px] font-mono text-muted-foreground/80">
-        0–100 刻度{{ hasCi ? ' · 95% CI 须线' : ' · 点估计（本轮未报告 CI）' }}
-      </span>
+      <span class="font-mono text-[10px] text-muted-foreground/80">0–100 刻度 · 95% CI 须线</span>
     </div>
 
     <div class="bars">
@@ -52,7 +46,7 @@ const pointLeft = (value: number): string => `${Math.min(100, Math.max(0, value 
             :data-bar-width="widthOf(row.value)"
             :data-harness-boxes="String(row.usesHarnessBoxes)"
             class="bar-row group rounded-[3px] px-0.5 transition-colors hover:bg-accent/40"
-            :title="`${row.label} · ${metricLabel(board.metric)} ${fmtPct(row.value)}${
+            :title="`${row.label} · accuracy ${fmtPct(row.value)}${
               row.ci ? ` · 95% CI ${fmtPct(row.ci[0])}–${fmtPct(row.ci[1])}` : ''
             }`"
           >
@@ -66,9 +60,9 @@ const pointLeft = (value: number): string => `${Math.min(100, Math.max(0, value 
               <span
                 v-if="isIncompleteCoverage(row)"
                 class="ml-1 font-mono text-[9px] text-foreground/60"
-                title="覆盖率低于 100%，不视为最终分"
+                :title="`覆盖率 ${fmtCoverage(row.coverage)}：未作答题目不计入分母`"
               >
-                [coverage {{ fmtCoverage(row.coverage) }}]
+                [coverage]
               </span>
             </span>
 
@@ -123,19 +117,6 @@ const pointLeft = (value: number): string => `${Math.min(100, Math.max(0, value 
         </div>
       </div>
     </div>
-
-    <p class="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-      <template v-if="hasCi">
-        条长 = {{ metricLabel(board.metric) }}，须线 = 95% bootstrap CI（对题目重采样 1,000 次）；区间重叠表示单次运行无法区分。
-      </template>
-      <template v-else>
-        条长 = {{ metricLabel(board.metric) }}；本 suite 本轮只报告点估计，未计算 bootstrap CI。
-      </template>
-      <template v-if="hasCoverage">
-        覆盖率低于 100% 的行标注
-        <span class="font-mono text-foreground/80">[coverage]</span>，不视为最终分。
-      </template>
-    </p>
   </div>
 </template>
 

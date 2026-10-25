@@ -16,11 +16,11 @@ defineProps<{ board: Board }>();
     <table class="w-full min-w-[680px] border-collapse text-left text-xs" data-leaderboard-table>
       <thead>
         <tr class="border-b border-border bg-muted/20 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-          <th class="py-2.5 pl-4 pr-2 text-left">模型</th>
-          <th class="py-2.5 px-3 text-right">指标值</th>
+          <th class="py-2.5 pl-4 pr-2 text-left">Model</th>
+          <th class="py-2.5 px-3 text-right">Score</th>
           <th class="py-2.5 px-3 text-left">95% CI</th>
-          <th class="py-2.5 px-3 text-right">覆盖率</th>
-          <th class="py-2.5 pl-3 pr-4 text-left" title="该行模型是否读取冻结检测器输出的 bbox">
+          <th class="py-2.5 px-3 text-right">Coverage</th>
+          <th class="py-2.5 pl-3 pr-4 text-left" title="Whether the row's model reads bounding boxes from the frozen detector">
             uses harness boxes
           </th>
         </tr>
@@ -50,7 +50,7 @@ defineProps<{ board: Board }>();
             <span
               v-if="isIncompleteCoverage(row)"
               class="ml-1 text-[9px] text-foreground/60"
-              :title="`覆盖率 ${fmtCoverage(row.coverage)}：未作答题目不计入分母`"
+              :title="`Coverage ${fmtCoverage(row.coverage)}: unanswered tasks are excluded from the denominator`"
             >
               [coverage]
             </span>
@@ -61,8 +61,8 @@ defineProps<{ board: Board }>();
               :class="row.usesHarnessBoxes ? 'text-foreground' : 'text-muted-foreground/80'"
               :title="
                 row.usesHarnessBoxes
-                  ? '读取冻结检测器的 bbox（结构化世界模型行）'
-                  : '只看原始输入，不读取框架检测框（VLM 行）'
+                  ? 'Reads bounding boxes from the frozen detector (structured world-state model rows)'
+                  : 'Sees raw input only; does not read framework boxes (VLM rows)'
               "
             >
               {{ row.usesHarnessBoxes }}

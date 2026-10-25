@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { BENCHMARK, REPRO } from '../data/openwsv';
+import { BENCHMARK } from '../data/openwsv';
+import { UPSTREAM_REPO_LABEL, UPSTREAM_REPO_URL } from './links';
 </script>
 
 <template>
@@ -34,12 +35,12 @@ import { BENCHMARK, REPRO } from '../data/openwsv';
       <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] text-muted-foreground">
         <span>updated {{ BENCHMARK.updated }}</span>
         <a
-          :href="REPRO.repo"
+          :href="UPSTREAM_REPO_URL"
           target="_blank"
           rel="noopener noreferrer"
           class="transition-colors hover:text-foreground"
         >
-          TYWIM/starlife_eval ↗
+          {{ UPSTREAM_REPO_LABEL }} ↗
         </a>
       </div>
     </div>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { Github, Menu, X } from 'lucide-vue-next';
-import { BENCHMARK, REPRO } from '../data/openwsv';
+import { BENCHMARK } from '../data/openwsv';
+import { UPSTREAM_REPO_LABEL, UPSTREAM_REPO_URL } from './links';
 
 const emit = defineEmits<{
   (e: 'navigate', targetId: string): void;
@@ -13,10 +14,10 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'leaderboard', label: '主榜' },
-  { id: 'protocol', label: '评测协议' },
-  { id: 'datasets', label: '数据集' },
-  { id: 'repro', label: '复现' },
+  { id: 'leaderboard', label: 'Leaderboard' },
+  { id: 'protocol', label: 'Protocol' },
+  { id: 'datasets', label: 'Datasets' },
+  { id: 'repro', label: 'Reproduce' },
 ];
 
 const activeSection = ref<string | null>(null);
@@ -94,7 +95,7 @@ onBeforeUnmount(() => {
     >
       <!-- Left: brand -->
       <div class="flex min-w-0 items-center gap-3">
-        <a href="#top" class="group flex min-w-0 items-center gap-2.5 text-foreground" aria-label="OpenWSV 首页">
+        <a href="#top" class="group flex min-w-0 items-center gap-2.5 text-foreground" aria-label="OpenWSV home">
           <svg
             class="h-6 w-auto shrink-0 transition-transform duration-200 group-hover:scale-105"
             viewBox="0 0 32 32"
@@ -125,7 +126,7 @@ onBeforeUnmount(() => {
       </div>
 
       <!-- Center: anchor nav -->
-      <nav class="hidden items-center justify-center gap-1 text-sm md:flex md:justify-self-center" aria-label="页面导航">
+      <nav class="hidden items-center justify-center gap-1 text-sm md:flex md:justify-self-center" aria-label="Page navigation">
         <button
           v-for="item in NAV_ITEMS"
           :key="item.id"
@@ -153,26 +154,26 @@ onBeforeUnmount(() => {
       <div class="flex shrink-0 items-center justify-end gap-2 md:justify-self-end">
         <span
           class="hidden h-7 items-center border border-border bg-card px-2 font-mono text-[10px] tracking-wide text-muted-foreground lg:inline-flex"
-          title="冻结框架版本"
+          title="Frozen framework version"
         >
           {{ BENCHMARK.framework }}
         </span>
         <a
-          :href="REPRO.repo"
+          :href="UPSTREAM_REPO_URL"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex h-8 items-center gap-1.5 border border-border bg-background px-2.5 text-foreground transition-colors hover:bg-accent"
-          aria-label="TYWIM/starlife_eval on GitHub"
+          :aria-label="`${UPSTREAM_REPO_LABEL} on GitHub`"
         >
           <Github class="size-3.5 shrink-0" />
-          <span class="hidden text-xs font-medium sm:inline">starlife_eval</span>
+          <span class="hidden text-xs font-medium sm:inline">{{ UPSTREAM_REPO_LABEL }}</span>
         </a>
         <button
           type="button"
           class="inline-flex h-8 w-8 cursor-pointer items-center justify-center border border-border bg-background text-foreground transition-colors hover:bg-accent md:hidden"
           :aria-expanded="mobileOpen"
           aria-controls="mobile-nav"
-          :aria-label="mobileOpen ? '关闭导航' : '打开导航'"
+          :aria-label="mobileOpen ? 'Close navigation' : 'Open navigation'"
           @click="mobileOpen = !mobileOpen"
         >
           <X v-if="mobileOpen" class="size-4" />
@@ -187,7 +188,7 @@ onBeforeUnmount(() => {
       id="mobile-nav"
       class="absolute inset-x-0 top-full z-50 border-b border-border bg-background shadow-lg md:hidden"
     >
-      <nav class="mx-auto max-w-6xl px-4 py-2 sm:px-6" aria-label="移动端导航">
+      <nav class="mx-auto max-w-6xl px-4 py-2 sm:px-6" aria-label="Mobile navigation">
         <button
           v-for="item in NAV_ITEMS"
           :key="`mobile-${item.id}`"
@@ -204,14 +205,14 @@ onBeforeUnmount(() => {
         </button>
         <div class="my-2 border-t border-border" aria-hidden="true" />
         <a
-          :href="REPRO.repo"
+          :href="UPSTREAM_REPO_URL"
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent/60 hover:text-foreground"
           @click="mobileOpen = false"
         >
           <Github class="size-4 shrink-0" />
-          <span class="truncate font-mono text-xs">TYWIM/starlife_eval</span>
+          <span class="truncate font-mono text-xs">{{ UPSTREAM_REPO_LABEL }}</span>
         </a>
       </nav>
     </div>

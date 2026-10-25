@@ -1,9 +1,9 @@
 /**
- * OpenWSV 数据层。
+ * OpenWSV data layer.
  *
- * 唯一的数据来源是 `./openwsv.generated.json`（由评测流水线从冻结框架
- * `openwsv-1` 的结果产物生成）。本文件只做类型收窄、排序与格式化，
- * 不包含任何写死的排行榜数值。
+ * The only data source is `./openwsv.generated.json`, generated from evaluation
+ * artifacts of the frozen `openwsv-1` framework. This file only narrows types,
+ * sorts and formats values; it contains no hardcoded leaderboard numbers.
  */
 
 import raw from './openwsv.generated.json';
@@ -19,13 +19,13 @@ export interface WsvBenchmark {
 export interface BoardRow {
   id: string;
   label: string;
-  /** 0–1 的指标值（accuracy）。 */
+  /** Metric value in 0–1 (accuracy). */
   value: number;
-  /** 95% CI（0–1）；未计算时为 null。 */
+  /** 95% CI in 0–1; null when not computed. */
   ci: [number, number] | null;
-  /** 完整回答覆盖的题目比例（0–1）；未报告时为 null。 */
+  /** Share of tasks with a complete answer in 0–1; null when not reported. */
   coverage: number | null;
-  /** 该行模型是否读取冻结检测器输出的 bbox（VLM 行为 false）。 */
+  /** Whether the row's model reads bounding boxes from the frozen detector (false for VLM rows). */
   usesHarnessBoxes: boolean;
 }
 
@@ -33,7 +33,7 @@ export interface Board {
   id: string;
   label: string;
   n: number | null;
-  /** 'pending' = 尚未出分，不显示任何分数。 */
+  /** 'pending' = no scores yet; no numbers are rendered. */
   state?: 'pending';
   note?: string;
   rows?: BoardRow[];
@@ -83,13 +83,13 @@ export const isPending = (board: Board): boolean => board.state === 'pending';
 
 export const rowsOf = (board: Board): BoardRow[] => board.rows ?? [];
 
-/** 按指标值降序。 */
+/** Sort by metric value, descending. */
 export const sortedRows = (board: Board): BoardRow[] =>
   rowsOf(board).slice().sort((a, b) => b.value - a.value);
 
 export const findBoard = (id: string): Board | undefined => BOARDS.find((board) => board.id === id);
 
-/** 默认 tab：优先数据里的 defaultBoard，缺失则第一个。 */
+/** Default tab: the payload's defaultBoard, otherwise the first board. */
 export const DEFAULT_BOARD: string =
   findBoard(DATA.defaultBoard)?.id ?? BOARDS[0]?.id ?? 'overall';
 
@@ -101,13 +101,13 @@ export const MODEL_COUNT = new Set(SHIPPED_BOARDS.flatMap((board) => rowsOf(boar
 
 export const fmtCount = (n: number): string => n.toLocaleString('en-US');
 
-/** 0–1 → 百分比（默认两位小数）。 */
+/** 0–1 → percentage (two decimals by default). */
 export const fmtPct = (value: number, digits = 2): string => `${(value * 100).toFixed(digits)}%`;
 
 export const fmtCi = (ci: [number, number] | null): string =>
   ci ? `[${fmtPct(ci[0])} – ${fmtPct(ci[1])}]` : '—';
 
-/** 覆盖率：整数不补小数，其余两位。 */
+/** Coverage: integers without decimals, otherwise two decimals. */
 export const fmtCoverage = (coverage: number | null): string => {
   if (coverage == null) return '—';
   const pct = coverage * 100;
@@ -117,13 +117,14 @@ export const fmtCoverage = (coverage: number | null): string => {
 export const isIncompleteCoverage = (row: BoardRow): boolean =>
   row.coverage != null && row.coverage < 1;
 
-/** 模型 id → 家族色（仅视觉映射，不参与口径）。 */
+/** Model id → family color (visual mapping only; not part of the protocol). */
 const MODEL_COLORS: Array<[RegExp, string]> = [
   [/^qwen/i, 'var(--color-qwen)'],
   [/^deepseek/i, 'var(--color-deepseek)'],
   [/^glm/i, 'var(--color-zhipu)'],
   [/^minimax/i, 'var(--color-minimax)'],
   [/^mimo/i, 'var(--color-xiaomi)'],
+  [/^kimi/i, 'var(--color-kimi)'],
 ];
 
 export const modelColor = (id: string): string => {

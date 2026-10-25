@@ -27,7 +27,7 @@ const pointLeft = (value: number): string => `${Math.min(100, Math.max(0, value 
       <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
         accuracy<template v-if="board.n != null"> · n = {{ fmtCount(board.n) }}</template>
       </span>
-      <span class="font-mono text-[10px] text-muted-foreground/80">0–100 刻度 · 95% CI 须线</span>
+      <span class="font-mono text-[10px] text-muted-foreground/80">0–100 scale · 95% CI whiskers</span>
     </div>
 
     <div class="bars">
@@ -60,7 +60,7 @@ const pointLeft = (value: number): string => `${Math.min(100, Math.max(0, value 
               <span
                 v-if="isIncompleteCoverage(row)"
                 class="ml-1 font-mono text-[9px] text-foreground/60"
-                :title="`覆盖率 ${fmtCoverage(row.coverage)}：未作答题目不计入分母`"
+                :title="`Coverage ${fmtCoverage(row.coverage)}: unanswered tasks are excluded from the denominator`"
               >
                 [coverage]
               </span>

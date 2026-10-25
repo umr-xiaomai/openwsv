@@ -5,7 +5,7 @@ import { DATASETS } from '../data/openwsv';
 
 <template>
   <section id="datasets" class="mt-14 scroll-mt-20 sm:mt-20">
-    <SectionHeader index="03" title="数据集" eyebrow="Datasets · three suites" />
+    <SectionHeader index="03" title="Datasets" eyebrow="Datasets · frozen suites" />
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <article

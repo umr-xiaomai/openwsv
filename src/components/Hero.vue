@@ -7,10 +7,10 @@ defineEmits<{
 }>();
 
 const meta = [
-  `${BOARDS.length} 个榜单`,
-  `${SHIPPED_BOARDS.length} 个已出分`,
-  `${MODEL_COUNT} 个参评模型`,
-  `框架 ${BENCHMARK.framework}`,
+  `${BOARDS.length} boards`,
+  `${SHIPPED_BOARDS.length} scored`,
+  `${MODEL_COUNT} models`,
+  `framework ${BENCHMARK.framework}`,
 ];
 </script>
 
@@ -57,7 +57,9 @@ const meta = [
       </p>
 
       <p class="mt-5 text-[15px] leading-relaxed text-foreground/90 sm:text-base">
-        同一批题、同一份 GT、同一套冻结框架，评测多模态模型与结构化世界模型的空间理解、物品关系与状态变化。
+        One shared task set, one ground truth and one frozen framework: text-only VLMs and
+        structured world-state models are compared on spatial understanding, object relations and
+        state change under the same protocol.
       </p>
 
       <div class="mt-6 flex flex-wrap items-center gap-3">
@@ -66,7 +68,7 @@ const meta = [
           class="inline-flex h-9 cursor-pointer items-center gap-2 bg-foreground px-4 text-xs font-medium text-background transition-opacity hover:opacity-90"
           @click="$emit('navigate', 'leaderboard')"
         >
-          <span>查看主榜</span>
+          <span>View leaderboard</span>
           <ArrowDownRight class="size-3.5" />
         </button>
         <button
@@ -74,7 +76,7 @@ const meta = [
           class="inline-flex h-9 cursor-pointer items-center gap-2 border border-border bg-background px-4 text-xs font-medium text-foreground transition-colors hover:bg-accent"
           @click="$emit('navigate', 'repro')"
         >
-          <span>复现</span>
+          <span>Reproduce</span>
           <Terminal class="size-3.5 text-muted-foreground" />
         </button>
         <span class="font-mono text-[11px] text-muted-foreground">

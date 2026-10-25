@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { ArrowUpRight, Check, Copy, Github, Terminal } from 'lucide-vue-next';
 import SectionHeader from './SectionHeader.vue';
 import { BENCHMARK, REPRO } from '../data/openwsv';
+import { UPSTREAM_REPO_LABEL, UPSTREAM_REPO_URL } from './links';
 
 const copied = ref(false);
 
@@ -21,7 +22,7 @@ const copyCommand = async () => {
 
 <template>
   <section id="repro" class="mt-14 scroll-mt-20 sm:mt-20">
-    <SectionHeader index="04" title="复现" eyebrow="Reproduce · one command" />
+    <SectionHeader index="04" title="Reproduce" eyebrow="Reproduce · one command" />
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
       <div class="border border-border bg-card/40">
@@ -39,7 +40,7 @@ const copyCommand = async () => {
           >
             <Check v-if="copied" class="size-3 text-emerald-300" />
             <Copy v-else class="size-3" />
-            {{ copied ? '已复制' : '复制' }}
+            {{ copied ? 'Copied' : 'Copy' }}
           </button>
         </div>
 
@@ -50,12 +51,12 @@ const copyCommand = async () => {
 
         <p class="border-t border-border px-4 py-2.5 text-[11px] leading-relaxed text-muted-foreground">
           <span class="font-mono text-foreground/80">&lt;id&gt;</span>
-          取榜单中的模型 id（如 qwen3.8-flash）。
+          is a model id from the leaderboard (e.g. qwen3.8-flash).
         </p>
       </div>
 
       <a
-        :href="REPRO.repo"
+        :href="UPSTREAM_REPO_URL"
         target="_blank"
         rel="noopener noreferrer"
         data-repro-repo
@@ -64,10 +65,10 @@ const copyCommand = async () => {
         <span>
           <span class="flex items-center gap-1.5 text-[13px] font-medium text-foreground">
             <Github class="size-3.5" />
-            评测仓库
+            Evaluation repository
           </span>
           <span class="mt-1 block font-mono text-[10px] text-muted-foreground">
-            TYWIM/starlife_eval
+            {{ UPSTREAM_REPO_LABEL }}
           </span>
         </span>
         <ArrowUpRight class="size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />

@@ -7,15 +7,15 @@ const pad = (index: number): string => String(index + 1).padStart(2, '0');
 
 <template>
   <section id="protocol" class="mt-14 scroll-mt-20 sm:mt-20">
-    <SectionHeader index="02" title="评测协议" eyebrow="Protocol · frozen five" />
+    <SectionHeader index="02" title="Protocol" eyebrow="Protocol · frozen values" />
 
     <div data-protocol-table class="border border-border bg-card/40">
       <div
         class="grid grid-cols-[2.5rem_4.5rem_minmax(0,1fr)] items-baseline gap-3 border-b border-border bg-muted/20 px-4 py-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground sm:grid-cols-[2.5rem_6rem_minmax(0,1fr)]"
       >
         <span>#</span>
-        <span>组件</span>
-        <span>冻结值 · {{ BENCHMARK.framework }}</span>
+        <span>Component</span>
+        <span>Frozen value · {{ BENCHMARK.framework }}</span>
       </div>
 
       <div

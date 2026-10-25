@@ -1,22 +1,24 @@
 # OpenWSV — World-State Vision Benchmark (site)
 
 Static frontend for the **OpenWSV** leaderboard (Vue 3 + Vite 6 + Tailwind CSS 4).
-Scores are produced by the frozen evaluation framework in
-[TYWIM/starlife_eval](https://github.com/TYWIM/starlife_eval): one dataset hash set,
-one detector (GroundingDINO-tiny, weights pinned by sha256), one prompt version and one
+All user-visible copy is English; every repository link points at the upstream project
+[umr-xiaomai/openwsv](https://github.com/umr-xiaomai/openwsv).
+
+Scores are produced by the frozen evaluation framework in the upstream
+[umr-xiaomai/openwsv](https://github.com/umr-xiaomai/openwsv) repository: one dataset hash
+set, one detector (GroundingDINO-tiny, weights pinned by sha256), one prompt version and one
 scorer — so text-only VLMs and structured world-state models are compared under the same
-protocol.
+frozen protocol.
 
 ## Page layout
 
-- **Leaderboard** — the default view ranks models by **composite score** (equal-weight mean
-  over capabilities that have scores; currently T1 only). Tabs switch to a single
-  capability: T1 single-image relations / T1 relation subset / T4 spatial change /
-  T5 relation change / T6 state replay / T8 abstract geometry. Capabilities without scores
-  render a "pending" placeholder and **no numbers**.
-- **Protocol** — the five frozen items: dataset, detector, prompt, scorer, seeds.
-- **Datasets** — the three OpenWSV suites (single-image relations, structured world-state
-  pairs, abstract geometry).
+- **Leaderboard** — the default **Overall** view ranks models by composite score (equal-weight
+  mean over capabilities that have scores). Tabs switch between the boards present in the
+  generated payload: overall / T1 single-image relations / T1 relation subset / T4 spatial
+  change / T5 relation change / T6 state replay / T7 cross-frame / T8 abstract geometry.
+  Boards without scores render a "pending" placeholder and **no numbers**.
+- **Protocol** — the frozen items: dataset, detector, prompt, scorer, seeds.
+- **Datasets** — the frozen OpenWSV suites rendered from the generated payload.
 - **Reproduce** — one command; every results JSON carries the full framework fingerprint.
 
 ## Data
@@ -27,8 +29,10 @@ The page is fully static; there is no API call at runtime:
 src/data/openwsv.generated.json   # boards / protocol / datasets / repro payload
 ```
 
-The payload is generated from evaluation runs and synced by hand; metrics that were not
-measured are `pending`, never `0` and never estimated.
+Board labels, notes, protocol values and dataset descriptions are rendered verbatim from the
+payload; only the `overall` tab label is fixed to "Overall". The payload is generated from
+evaluation runs and synced by hand; metrics that were not measured are `pending`, never `0`
+and never estimated.
 
 ## Data bundle (clone and reproduce)
 
@@ -47,9 +51,8 @@ suite jsonl files (`spatialmqa` 1,612 tasks, `pairs_test` 1,000 pairs) and a per
 `SHA256SUMS`. 29 tasks reference images missing from the public release; they are scored as
 **not covered** and excluded from the accuracy denominator.
 
-The frozen evaluation framework (detector, prompts, scoring, CLI) lives in
-[TYWIM/starlife_eval](https://github.com/TYWIM/starlife_eval); install it with
-`pip install -e ".[dev,detector]"` and run:
+The frozen evaluation framework (detector, prompts, scoring, CLI) lives in the same upstream
+repository; install it with `pip install -e ".[dev,detector]"` and run:
 
 ```bash
 python -m starlife_eval.wsv run --suite spatialmqa --model <id> \

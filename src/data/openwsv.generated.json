@@ -87,6 +87,18 @@
       "note": "Initial campaign readings (frozen openwsv-1 framework, 1,612 single-image multiple-choice questions).",
       "rows": [
         {
+          "id": "gemini-3.8-flash-high",
+          "label": "gemini-3.8-flash-high",
+          "value": 0.8184,
+          "ci": [
+            0.7973,
+            0.8383
+          ],
+          "coverage": 0.9975,
+          "usesHarnessBoxes": false,
+          "n": 1612
+        },
+        {
           "id": "qwen3.8-flash",
           "label": "qwen3.8-flash",
           "value": 0.7655,
@@ -149,6 +161,18 @@
       "n": 305,
       "note": "The 305 'Where is/are the X located relative to the Y?' questions of T1.",
       "rows": [
+        {
+          "id": "gemini-3.8-flash-high",
+          "label": "gemini-3.8-flash-high",
+          "value": 0.9607,
+          "ci": [
+            0.9377,
+            0.9803
+          ],
+          "coverage": 1.0,
+          "usesHarnessBoxes": false,
+          "n": 305
+        },
         {
           "id": "glm-5.3-flash",
           "label": "glm-5.3-flash",
@@ -584,6 +608,6 @@
       "gemini-3.8-flash-high",
       "starlife-1-wsv-lite"
     ],
-    "boards_filled": 4
+    "boards_filled": 6
   }
 }

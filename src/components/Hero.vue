@@ -18,19 +18,9 @@ const meta = [
   <section id="top" class="relative overflow-hidden border-b border-border">
     <div class="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
     <div class="relative mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 sm:pb-12 sm:pt-18">
-      <div
-        class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground"
-      >
-        <span class="inline-flex items-center gap-1.5">
-          <span class="inline-block size-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-          Open World-State Vision Benchmark
-        </span>
-        <span class="text-border">/</span>
-        <span>v{{ BENCHMARK.version }} · {{ BENCHMARK.updated }}</span>
-      </div>
 
       <h1
-        class="mt-5 flex items-center gap-3 text-[52px] font-semibold leading-[0.95] tracking-[-0.04em] text-foreground sm:gap-5 sm:text-[72px]"
+        class="flex items-center gap-3 text-[52px] font-semibold leading-[0.95] tracking-[-0.04em] text-foreground sm:gap-5 sm:text-[72px]"
       >
         <svg
           viewBox="0 0 48 48"
@@ -53,7 +43,7 @@ const meta = [
       </h1>
 
       <p class="mt-3 font-mono text-[13px] tracking-[0.04em] text-muted-foreground sm:text-sm">
-        WSV · Open World-State Vision Benchmark
+        Open World-State Vision Benchmark
       </p>
 
       <p class="mt-5 text-[15px] leading-relaxed text-foreground/90 sm:text-base">

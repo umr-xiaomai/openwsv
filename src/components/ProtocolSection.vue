@@ -7,7 +7,7 @@ const pad = (index: number): string => String(index + 1).padStart(2, '0');
 
 <template>
   <section id="protocol" class="mt-14 scroll-mt-20 sm:mt-20">
-    <SectionHeader index="02" title="Protocol" eyebrow="Protocol · frozen values" />
+    <SectionHeader index="02" title="Protocol" />
 
     <div data-protocol-table class="border border-border bg-card/40">
       <div

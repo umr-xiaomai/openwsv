@@ -29,7 +29,7 @@ const nLabel = (board: Board): string => {
 
 <template>
   <section id="leaderboard" class="mt-14 scroll-mt-20 sm:mt-20">
-    <SectionHeader index="01" title="Leaderboard" eyebrow="Leaderboard · overall & sub-tasks" />
+    <SectionHeader index="01" title="Leaderboard" />
 
     <p class="mb-4 text-[12px] leading-relaxed text-muted-foreground">
       <span class="font-mono text-foreground/85">{{ COMPOSITE.label }}</span>

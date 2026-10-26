@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { Github, Menu, X } from 'lucide-vue-next';
+import { Github, Menu, Moon, Sun, X } from 'lucide-vue-next';
 import { BENCHMARK } from '../data/openwsv';
 import { UPSTREAM_REPO_LABEL, UPSTREAM_REPO_URL } from './links';
+import { useTheme } from '../composables/useTheme';
 
 const emit = defineEmits<{
   (e: 'navigate', targetId: string): void;
 }>();
+
+const { theme, toggleTheme } = useTheme();
 
 interface NavItem {
   id: string;
@@ -118,9 +121,6 @@ onBeforeUnmount(() => {
             >
               {{ BENCHMARK.name }}
             </span>
-            <span class="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:inline">
-              {{ BENCHMARK.short }}
-            </span>
           </div>
         </a>
       </div>
@@ -150,14 +150,19 @@ onBeforeUnmount(() => {
         </button>
       </nav>
 
-      <!-- Right: framework chip + repo + mobile toggle -->
+      <!-- Right: framework chip + theme toggle + repo + mobile toggle -->
       <div class="flex shrink-0 items-center justify-end gap-2 md:justify-self-end">
-        <span
-          class="hidden h-7 items-center border border-border bg-card px-2 font-mono text-[10px] tracking-wide text-muted-foreground lg:inline-flex"
-          title="Frozen framework version"
+        <button
+          type="button"
+          class="inline-flex h-8 w-8 cursor-pointer items-center justify-center border border-border bg-background text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          data-theme-toggle
+          @click="toggleTheme"
         >
-          {{ BENCHMARK.framework }}
-        </span>
+          <Sun v-if="theme === 'dark'" class="size-4" />
+          <Moon v-else class="size-4" />
+        </button>
         <a
           :href="UPSTREAM_REPO_URL"
           target="_blank"
@@ -204,6 +209,20 @@ onBeforeUnmount(() => {
           {{ item.label }}
         </button>
         <div class="my-2 border-t border-border" aria-hidden="true" />
+        <button
+          type="button"
+          class="flex w-full cursor-pointer items-center justify-between rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent/60 hover:text-foreground"
+          @click="toggleTheme"
+        >
+          <span class="flex items-center gap-2">
+            <Sun v-if="theme === 'dark'" class="size-4" />
+            <Moon v-else class="size-4" />
+            <span>Theme</span>
+          </span>
+          <span class="font-mono text-[11px] capitalize text-foreground">
+            {{ theme === 'dark' ? 'Dark' : 'Light' }}
+          </span>
+        </button>
         <a
           :href="UPSTREAM_REPO_URL"
           target="_blank"

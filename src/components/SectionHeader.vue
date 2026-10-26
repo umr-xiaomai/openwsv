@@ -2,7 +2,7 @@
 defineProps<{
   index: string;
   title: string;
-  eyebrow: string;
+  eyebrow?: string;
 }>();
 </script>
 
@@ -15,9 +15,7 @@ defineProps<{
           {{ title }}
         </h2>
       </div>
-      <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-        {{ eyebrow }}
-      </span>
+      <span v-if="eyebrow" class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{{ eyebrow }}</span>
     </div>
     <div v-if="$slots.default" class="mt-3 max-w-3xl text-[13px] leading-relaxed text-muted-foreground">
       <slot />

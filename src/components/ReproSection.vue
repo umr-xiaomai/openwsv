@@ -22,7 +22,7 @@ const copyCommand = async () => {
 
 <template>
   <section id="repro" class="mt-14 scroll-mt-20 sm:mt-20">
-    <SectionHeader index="04" title="Reproduce" eyebrow="Reproduce · one command" />
+    <SectionHeader index="04" title="Reproduce" />
 
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
       <div class="border border-border bg-card/40">
@@ -76,3 +76,4 @@ const copyCommand = async () => {
     </div>
   </section>
 </template>
+

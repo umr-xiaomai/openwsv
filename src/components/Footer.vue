@@ -27,12 +27,10 @@ import { UPSTREAM_REPO_LABEL, UPSTREAM_REPO_URL } from './links';
         <span class="text-[15px] font-semibold tracking-tight text-foreground">
           {{ BENCHMARK.name }}
         </span>
-        <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-          {{ BENCHMARK.short }}
-        </span>
       </div>
 
       <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] text-muted-foreground">
+        <span>v{{ BENCHMARK.version }}</span>
         <span>updated {{ BENCHMARK.updated }}</span>
         <a
           :href="UPSTREAM_REPO_URL"

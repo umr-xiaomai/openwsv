@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import Header from './components/Header.vue';
 import Hero from './components/Hero.vue';
 import LeaderboardSection from './components/LeaderboardSection.vue';
@@ -6,6 +7,13 @@ import ProtocolSection from './components/ProtocolSection.vue';
 import DatasetsSection from './components/DatasetsSection.vue';
 import ReproSection from './components/ReproSection.vue';
 import Footer from './components/Footer.vue';
+import { useTheme } from './composables/useTheme';
+
+const { initTheme } = useTheme();
+
+onMounted(() => {
+  initTheme();
+});
 
 const scrollToSection = (sectionId: string) => {
   document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
@@ -13,7 +21,7 @@ const scrollToSection = (sectionId: string) => {
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col bg-background text-foreground">
+  <div class="flex min-h-screen flex-col bg-background text-foreground transition-colors duration-150">
     <Header @navigate="scrollToSection" />
 
     <main class="flex-1">

@@ -1,22 +1,38 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#141414" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" />
     <title>OpenWSV · World-State Vision Benchmark</title>
     <meta
       name="description"
       content="OpenWSV is a leaderboard for world-state vision: one shared task set, one ground truth and one frozen evaluation framework, comparing text-only VLMs and structured world-state models on spatial understanding, object relations and state change. Scores report coverage and 95% bootstrap confidence intervals; unmeasured metrics are marked pending, never estimated."
     />
 
+    <!-- Theme initialization: default to light mode unless 'dark' is explicitly stored in localStorage -->
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('theme');
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#141414');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (_) {}
+      })();
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%2338bdf8' stroke-width='2.2'><polygon points='16,2 30,10 30,22 16,30 2,22 2,10'/><line x1='16' y1='2' x2='16' y2='30'/><line x1='2' y1='10' x2='30' y2='22'/><line x1='30' y1='10' x2='2' y2='22'/></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%230284c7' stroke-width='2.2'><polygon points='16,2 30,10 30,22 16,30 2,22 2,10'/><line x1='16' y1='2' x2='16' y2='30'/><line x1='2' y1='10' x2='30' y2='22'/><line x1='30' y1='10' x2='2' y2='22'/></svg>" />
   </head>
   <body class="bg-background text-foreground antialiased selection:bg-foreground selection:text-background min-h-screen">
     <div id="app"></div>

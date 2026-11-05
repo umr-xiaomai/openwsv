@@ -27,3 +27,23 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+.pytest_cache/
+.pytest_tmp/
+
+# Local working data / runs (the tracked bundle is data/openwsv-data-1.0/*.zip.part*)
+data/openwsv-data-1.0/data_v15/
+data/openwsv-data-1.0/suites/
+data/openwsv-data-1.0/v2data/
+data/openwsv-data-1.1/
+openwsv-data-1.0.zip
+reports/
+*.npz
+*.pt

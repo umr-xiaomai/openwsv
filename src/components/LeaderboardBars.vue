@@ -10,9 +10,12 @@ import {
   type Board,
 } from '../data/openwsv';
 
-const props = defineProps<{ board: Board }>();
+const props = defineProps<{
+  board: Board;
+  rows?: BoardRow[];
+}>();
 
-const rows = computed(() => sortedRows(props.board));
+const rows = computed(() => props.rows ?? sortedRows(props.board));
 
 const widthOf = (value: number): string => `${Math.min(100, Math.max(0, value * 100)).toFixed(2)}%`;
 const ciLeft = (ci: [number, number] | null): string => `${((ci?.[0] ?? 0) * 100).toFixed(2)}%`;

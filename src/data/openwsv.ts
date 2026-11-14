@@ -119,12 +119,17 @@ export const isIncompleteCoverage = (row: BoardRow): boolean =>
 
 /** Model id → family color (visual mapping only; not part of the protocol). */
 const MODEL_COLORS: Array<[RegExp, string]> = [
-  [/^qwen/i, 'var(--color-qwen)'],
+  [/^starlife/i, 'var(--color-starlife)'],
+  [/^gemini/i, 'var(--color-gemini)'],
   [/^deepseek/i, 'var(--color-deepseek)'],
   [/^glm/i, 'var(--color-zhipu)'],
+  [/^qwen/i, 'var(--color-qwen)'],
   [/^minimax/i, 'var(--color-minimax)'],
-  [/^mimo/i, 'var(--color-xiaomi)'],
   [/^kimi/i, 'var(--color-kimi)'],
+  [/^mimo/i, 'var(--color-xiaomi)'],
+  [/^step/i, 'var(--color-bytedance)'],
+  [/^gpt|^o[1-9]|^openai/i, 'var(--color-openai)'],
+  [/^claude|^anthropic/i, 'var(--color-anthropic)'],
 ];
 
 export const modelColor = (id: string): string => {
@@ -132,4 +137,56 @@ export const modelColor = (id: string): string => {
     if (pattern.test(id)) return color;
   }
   return 'var(--muted-foreground)';
+};
+
+/** Model provider / creator mapping for professional display. */
+export const modelProvider = (id: string): string => {
+  if (/^gemini/i.test(id)) return 'Google';
+  if (/^deepseek/i.test(id)) return 'DeepSeek';
+  if (/^glm/i.test(id)) return 'Zhipu AI';
+  if (/^minimax/i.test(id)) return 'MiniMax';
+  if (/^kimi/i.test(id)) return 'Moonshot AI';
+  if (/^qwen/i.test(id)) return 'Alibaba';
+  if (/^mimo/i.test(id)) return 'Xiaomi';
+  if (/^starlife/i.test(id)) return 'StarLife';
+  if (/^step/i.test(id)) return 'StepFun';
+  if (/^gpt|^o[1-9]|^openai/i.test(id)) return 'OpenAI';
+  if (/^claude|^anthropic/i.test(id)) return 'Anthropic';
+  return 'Independent';
+};
+
+export interface SuiteScoreItem {
+  boardId: string;
+  boardLabel: string;
+  value: number;
+  ci: [number, number] | null;
+  coverage: number | null;
+  usesHarnessBoxes: boolean;
+}
+
+/** Get all suite evaluations for a particular model id. */
+export const getModelSuiteScores = (modelId: string): SuiteScoreItem[] => {
+  const result: SuiteScoreItem[] = [];
+  for (const board of SHIPPED_BOARDS) {
+    const row = rowsOf(board).find((r) => r.id === modelId);
+    if (row) {
+      result.push({
+        boardId: board.id,
+        boardLabel: board.id === 'overall' ? 'Overall' : board.label,
+        value: row.value,
+        ci: row.ci,
+        coverage: row.coverage,
+        usesHarnessBoxes: row.usesHarnessBoxes,
+      });
+    }
+  }
+  return result;
+};
+
+/** Get overall leaderboard top performer. */
+export const getOverallLeader = (): BoardRow | null => {
+  const overallBoard = findBoard('overall');
+  if (!overallBoard) return null;
+  const sorted = sortedRows(overallBoard);
+  return sorted[0] ?? null;
 };
